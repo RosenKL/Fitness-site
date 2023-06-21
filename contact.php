@@ -296,7 +296,7 @@ try {
                   <br>
                   <br>        
                                    
-                  <input type="text" class="input" placeholder="Е-майл" name="email" id="email" required/>
+                  <input type="text" class="input" placeholder="Емайл" name="email" id="email" required/>
                   <br>
                   <br>     
                   <input type="number" class="input" name="mobile" id="mobile" placeholder=" Тел. номер" size="10" required/>
