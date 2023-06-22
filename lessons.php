@@ -27,7 +27,7 @@ html, body {
             display: flex;
             width: 70%;
             height:50px;
-            left: 48%;
+            left: 60%;
             top: 0;
             margin: 10px auto;
             position: absolute;   
@@ -193,8 +193,7 @@ html, body {
                <li><a href="logedindex.php">НАЧАЛО</a></li> 
                <li><a href="aboutus.php">ЗА НАС</a></li>
                <li><a href="profile.php">ПРОФИЛ</a></li>
-               <li><a href="contact.php">ЗАПИТВАНИЯ</a></li>
-               <li> <a href="logout.php">НАПУСНИ ПРОФИЛА</a></li>         
+               <li><a href="contact.php">ЗАПИТВАНИЯ</a></li>         
             </ul>
           
         </div>
