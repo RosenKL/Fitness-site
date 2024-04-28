@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,bg',
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+        }
+    </script>
     <title>about us</title>
     <style>
         body{
-        background:url('img/bggml.jpg');
+        background:url('http://localhost/site%20for%20project/Fitness-site/img/bggml.jpg');
         font-family: Bradley Hand ITC;
         font-size: 20px;
         background-repeat: no-repeat;
@@ -66,6 +76,17 @@
             height: 80%;
             font-size: 25px;
         }
+        .pera2 li {
+    display: inline; /* Display the list items inline */
+    margin-right: 10px; /* Add some spacing between list items */
+}
+.list-container {
+    margin-left: 20px; /* Adjust the left margin of the list container */
+}
+
+.list-container ul {
+    padding-left: 20px; /* Add left padding to the list */
+}
        
         .photo{
             
@@ -153,6 +174,7 @@
            word-spacing: 3px;
            font-size:large;
            font-family:'Calibri', courier, monospace;
+        
            
            
        }
@@ -165,8 +187,8 @@
     <div>
         <header class="heading">
             <div id="nav">
-                <a href="index.html">
-                    <img class="logo" src="img/gyml3w.png" alt="">
+                <a href="http://localhost/site%20for%20project/Fitness-site/Main/index.php">
+                    <img class="logo" src="http://localhost/site%20for%20project/Fitness-site/img/gyml3w.png" alt="">
                 </a>
                 <h1 class="h1">HammerCross</h1>
             </div>
@@ -176,11 +198,12 @@
             </div>
         </header>
         
-
+        
         <table class="pera" >
+          
             <tr>
                 <td class="box">
-                    <img src="img/train.jpg" class="photo"  >
+                    <img src="http://localhost/site%20for%20project/Fitness-site/img/train.jpg" class="photo"  >
                 </td>
                 <td >
                    
@@ -188,11 +211,24 @@
                     
                     Ние сме пътя към здравото тяло! <br>
                     Нашият приятелски настроен, професионален персонал е обучен да ви помогне във вашето фитнес пътуване,<br> Без значение от колко подкрепа се нуждаете.
-                    <br><br><br>Членството включва безплатна фитнес консултация без натиск,<br> достъп до повече от 160 в MP и 4,500+ фитнес зали по целия свят, и винаги отворен 24/7 удобство.
-                    <br>Всичко това в приветлив клуб и подкрепяща членска общност.
-                   <br><br><br><br>
-                    <a href="registration.php">Да започваме!</a> <br>Посетете по време на часовете на персонала или се обадете за среща днес!
-                    <br><br><br><br>
+                    <br><br><br>Направете запитване в отдел <a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php"> ЗАПИТВАНИЯ</a> за едно от следните неща:<br> 
+                    
+                      1.Час за тренировка с професионален трениор. <br>
+                      2.Съзадаване на персонален режим за хранене (диета). <br>
+                      3.Съзадаване на персонален режим на тренировка. <br>
+                      4.Друго. 
+                   <br><br>
+                    
+                   Или поръчайте, някой от нашите високо качествени продукти от <a href="http://localhost/site%20for%20project/Fitness-site/Main/catalog.php"> КАТАЛОГА</a> ни. <br>  
+                    <a href="http://localhost/site%20for%20project/Fitness-site/Main/registration.php">Да започваме!</a> <br>Посетете по време на часовете на персонала или се обадете за среща днес!
+                    <br><br>
+                    Магазин: кв. Север, гр.Ботевград
+                    <br>
+                    Тел. за връзка: +359895757180 <br>
+                                    +359898274365
+                    <br>
+                    HammerCross@gmail.com
+                    <br>
                     Работно време: Понеделник-Петък - 6:30ч.- 19:00ч. <br>
                                    Събота-Неделя    - 8:00ч.- 19:00ч.
                     </p>

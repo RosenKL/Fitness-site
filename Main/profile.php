@@ -1,8 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['email'])) {
-  header('location: login.php');
+  header('location: http://localhost/site%20for%20project/Fitness-site/Main/login.php');
 }
+
+
 
 $dsn = 'mysql:host=localhost;dbname=fitness_site';
 $username = 'root';
@@ -60,10 +62,45 @@ try {
   } else {
     $errorMessage = "User data not found.";
   }
+
+  if ($userData) {
+    // Extract user data
+    $userId = $userData['ID']; // Assuming the column name is 'ID'
+    $firstname = $userData['firstname'];
+    $lastname = $userData['lastname'];
+    // Other user data extraction here...
+
+    // Fetch orders belonging to the user
+    $stmt_orders = $conn->prepare("SELECT * FROM orders WHERE user_id = :userId");
+    $stmt_orders->bindParam(':userId', $userId);
+    $stmt_orders->execute();
+    $orders = $stmt_orders->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch appointments belonging to the user by email
+    
+    $stmt_appointments = $conn->prepare("SELECT * FROM appointment WHERE user_id = :userId");
+    $stmt_appointments->bindParam(':userId', $userId);
+    $stmt_appointments->execute();
+    $appointments = $stmt_appointments->fetchAll(PDO::FETCH_ASSOC);
+} else {
+    $errorMessage = "User data not found.";
+}
 } catch (PDOException $e) {
   echo "Database connection failed: " . $e->getMessage();
   // Handle the database connection error appropriately
   exit(); // Terminate the script
+}
+function getStatusColor($status) {
+  switch ($status) {
+      case 'sent':
+          return 'orange';
+      case 'in progress':
+          return 'red';
+      case 'delivered':
+          return 'green';
+      default:
+          return 'black'; // Default color
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -78,7 +115,7 @@ try {
             var password = prompt("Наистина ли искате да изтриете профила си? Въведете отново паролата си:", "");
             if (password) {
                 if (confirm("Сигурни ли сте, че искате да изтриете профила си?")) {
-                    window.location.href = "delete_profile.php?password=" + encodeURIComponent(password);
+                    window.location.href = "http://localhost/site%20for%20project/Fitness-site/Processors/delete_profile.php?password=" + encodeURIComponent(password);
                 }
             }
           }
@@ -90,11 +127,11 @@ try {
 
     <style>
         body{
-            background-image:url(img/gym1.jpg);
-            background-repeat: no-repeat;
+            background-image:url(http://localhost/site%20for%20project/Fitness-site/img/R.jpg);
+            background-repeat: repeat;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-y: hidden;
+            
             
         }
         h3{
@@ -116,43 +153,38 @@ try {
         .header{
            
             height:45px;
-            padding-left: 40%;
+            padding-left: 45%;
            }
         
         
       
-       
-        .navbar li{
+           .navbar li{
             display: inline-block;
-            font:18px solid;
-            background-color: rgba(0, 0, 0, 0.582);
-            margin-left:16px;
-            height: 32px;
-            
-            
+            font:20px solid;
+             
            
         }
         .navbar li a{
            
             color:#ffffff;
             text-decoration-line: none;
-            padding:34px 20px;
-            transition:1s;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: normal;
+            padding: 34px 8px ;
             text-shadow: 2px 2px 20px black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             
         }
-        .navbar li:hover {
+        .navbar li a:hover {
            
             
-            background-color:#ffffff;
-                       
+            text-shadow:0 0 10px cyan,
+            0 0 25px cyan,
+            0 0 40px cyan,
+            0 0 55px cyan,
+            0 0 70px cyan,
+            0 0 80px cyan;
+            
         }
-        .navbar li a:hover{
-            color: black;
-            font-weight: normal;
-        }
+
 
         .c1 img{
            margin: 16% auto;
@@ -262,6 +294,8 @@ try {
         button:hover{
             background-color:rgba(240, 248, 255, 0.39);
         }
+
+
     </style>
 </head>
 <body>
@@ -273,10 +307,11 @@ try {
 <div class="header">
     
            <ul class="navbar">
-               <li><a href="logedindex.php">НАЧАЛО</a></li>
-               <li><a href="aboutus.php">ЗА НАС</a></li>
-               <li><a href="contact.php">ЗАПИТВАНИЯ</a></li>
-               <li><a href="login.php">НАПУСНИ ПРОФИЛА</a></li>             
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php">НАЧАЛО</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/aboutus.php">ЗА НАС</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php">ЗАПИТВАНИЯ</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/catalog.php">КАТАЛОГ</a></li> 
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/login.php">НАПУСНИ ПРОФИЛА</a></li>             
             </ul>
           
         </div>
@@ -287,7 +322,7 @@ try {
         <tr>
            
             <td class="c1">
-                <img src="img\dp.jpg" >
+                <img src="http://localhost/site%20for%20project/Fitness-site/img/dp.jpg" >
                 <td class="td">
     <br>
 
@@ -363,6 +398,69 @@ try {
 </tr>
     </form>
   </table>
+
+
+  <div style="text-align: center;">
+    <h4 style="color: white;">Поръчки</h4>
+<div class="table-container" style=" margin: 10px auto; width: 80%;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #f9f9f9;">
+                <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">First Name</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Last Name</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Mobile</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Total Price</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2; ">Status</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Created At</th>
+            </tr>
+            <!-- PHP code to fetch and display orders -->
+            <?php foreach ($orders as $order): ?>
+                <tr style="background-color: #f9f9f9;">
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $order['firstname']; ?></td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $order['lastname']; ?></td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $order['mobile']; ?></td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $order['total_price']; ?></td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd; color: <?php echo getStatusColor($order['status']); ?>"><?php echo $order['status']; ?>
+                        
+                    </td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><a href="http://localhost/site%20for%20project/Fitness-site/Main/order_details.php?id=<?php echo $order['id']; ?>"><?php echo $order['created_at']; ?></a></td>
+              
+                </tr>
+            <?php endforeach; ?>
+        </table>
+       </div>
+    </div>
+
+<br>
+<br>
+<div style="text-align: center; margin-bottom: 50px;">
+    <h4 style="color: white; ">Заявки</h4>
+    <div class="table-container" style="margin-bottom: 150px;  margin: 10px auto; width: 80%;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <!-- Table header -->
+        <tr style="background-color: #f9f9f9;">
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">First Name</th>
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Last Name</th>
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Mobile</th>
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Email</th>
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Category</th>
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Comment</th>
+         <th style="padding: 8px; text-align: left; border: 1px solid #ddd;  background-color: #f2f2f2;">Appointment Date</th>
+        </tr>
+        <!-- PHP code to fetch and display appointments -->
+        <?php foreach ($appointments as $appointment): ?>
+            <tr style="background-color: #f9f9f9;">
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['firstname']; ?></td>
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['lastname']; ?></td>
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['mobile']; ?></td>
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['email']; ?></td>
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['category']; ?></td>
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['comment']; ?></td>
+              <td style="padding: 8px; text-align: left; border: 1px solid #ddd;"><?php echo $appointment['appointment_date']; ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+     </div>
+</div>
 
 </body>
 </html>

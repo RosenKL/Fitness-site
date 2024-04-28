@@ -1,4 +1,16 @@
 <?php
+session_start();
+//Check if the user is already logged in
+if (isset($_SESSION['email'])) {
+   // Redirect the user to the appropriate page based on their role
+  if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+       header('Location: http://localhost/site%20for%20project/Fitness-site/Admin/admin_index.php');
+       exit();
+   } else {
+      header('Location: http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php');
+      exit();
+  }
+}
 // Set up the database connection parameters
 $servername = "localhost";
 $username = "root";
@@ -50,8 +62,8 @@ if (isset($_POST["submit"])) {
                     VALUES ('$firstname', '$lastname', '$dob', '$gender', '$mobile', '$email', '$hashedPassword', '$address', '$city', '$country')";
 
             if ($conn->query($sql) === TRUE) {
-                // Registration successful, redirect to login.php
-                header("Location:login.php");
+                // Registration successful, redirect to http://localhost/site%20for%20project/Fitness-site/Main/login.php
+                header("Location: http://localhost/site%20for%20project/Fitness-site/Main/login.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
@@ -71,7 +83,7 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>registration</title>
 
-    <script type="text/javascript" src="login.js"></script>
+    <script type="text/javascript" src="http://localhost/site%20for%20project/Fitness-site/Processors/login.js"></script>
     
   <style>
         
@@ -82,7 +94,7 @@ $conn->close();
           text-align: center;
           font-family:'Calibri', Courier, monospace;
           color: rgb(255, 255, 255);
-          background:url('img/bgimg.jpg');
+          background:url('http://localhost/site%20for%20project/Fitness-site/img/bgimg.jpg');
           background: opacity 0.1;
           background-repeat: no-repeat;
           background-size: cover;
@@ -254,13 +266,13 @@ $conn->close();
 
     <form  method="post" class="form" name="form" >
         <div class="container">
-          <h1>РЕГИСТРИРАХ СЕ В <a href="index.php">HAMMERCROSS</a></h1>
+          <h1>РЕГИСТРИРАХ СЕ В <a href="http://localhost/site%20for%20project/Fitness-site/Main/index.php">HAMMERCROSS</a></h1>
           <div class="icon">
 
             <input class="upload" type="file" id="file" name="photo" >
             <label for="file" id="upload">  
               
-              <img src="img/s4.jpg" class="avtar" id="avtar">
+              <img src="http://localhost/site%20for%20project/Fitness-site/img/s4.jpg" class="avtar" id="avtar">
             </label>
             
           </div>
@@ -329,7 +341,7 @@ $conn->close();
         </div>
           <br>
         <div class="container">
-          <p>Вече имате акаунт? <a class="link" href="login.php">Влез</a>.</p>
+          <p>Вече имате акаунт? <a class="link" href="http://localhost/site%20for%20project/Fitness-site/Main/login.php">Влез</a>.</p>
         </div>
         <br><br>
       </form>

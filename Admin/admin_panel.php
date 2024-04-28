@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['email'])) {
     // Redirect the user to the appropriate page based on their role
     if (isset($_SESSION['is_admin']) xor $_SESSION['is_admin']) {
-        header('Location: logedindex.php');
+        header('Location: http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php');
         exit();
     }
 }
@@ -65,7 +65,7 @@ try {
 
       $sql = "UPDATE users SET firstname= ?, lastname=?, address= ?, city= ?, country= ? WHERE ID = ?";
      $conn->prepare($sql)->execute([$firstname,$lastname,$address,$city,$country,$update_id]);
-      header("Location:admin_panel.php");
+      header("Location:http://localhost/site%20for%20project/Fitness-site/Admin/admin_panel.php");
   
     } 
  
@@ -74,10 +74,24 @@ try {
   $delete_id = @$_GET['delete_id'];
 
   if ( $delete_id ) {
+$sql_appointment = "DELETE FROM appointment WHERE user_id = ?";
+$conn->prepare($sql_appointment)->execute([$delete_id]);
+  // Delete from the 'users' table
 
-    $sql = "DELETE FROM users WHERE ID = ?";
-		$conn->prepare($sql)->execute([$delete_id]);
 
+
+// Delete from the 'rating' table
+$sql_rating = "DELETE FROM rating WHERE user_id = ?";
+$conn->prepare($sql_rating)->execute([$delete_id]);
+
+// Delete from the 'orders' table
+$sql_orders = "DELETE FROM orders WHERE user_id = ?";
+$conn->prepare($sql_orders)->execute([$delete_id]);
+
+$sql_users = "DELETE FROM users WHERE ID = ?";
+$conn->prepare($sql_users)->execute([$delete_id]);
+
+// Delete from the 'appointment' table
   }
   $make_admin_id = @$_GET['make_admin_id'];
 
@@ -111,56 +125,106 @@ try {
     <style>
         /* Container styles */
         body{
-            background-image:url(img/gym1.jpg);
+            background-image:url(http://localhost/site%20for%20project/Fitness-site/img/R.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: auto;
-
             
             
         }
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
 
-        .header{
-           
-            height:45px;
-            padding-left: 40%;
-           }
+        body {
+            font-size: 20px;
+            background-repeat: repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport */
+            overflow-x: hidden; /* Hide horizontal overflow */
+        }
+        .heading {
+          margin-bottom: 10%;
+
+        }
+        .formPanel{
+          margin: top 10%;
+        }
+
+
+        .center{
+            display: flex;
+            width: 70%;
+            height:50px;
+            left: 60%;
+            top: 0;
+            margin: 10px auto;
+            position: absolute;   
+        }
+
         
-        
-      
-       
+    
         .navbar li{
             display: inline-block;
-            font:18px solid;
-            background-color: rgba(0, 0, 0, 0.582);
-            margin-left:16px;
-            height: 32px;
-            
-            
+            font:20px solid;
            
         }
         .navbar li a{
            
             color:#ffffff;
             text-decoration-line: none;
-            padding:34px 20px;
-            transition:1s;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: normal;
+            padding:34px 5px;
             text-shadow: 2px 2px 20px black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             
         }
-        .navbar li:hover {
+        .navbar li a:hover {
            
+          
+            text-shadow:0 0 10px cyan,
+            0 0 25px cyan,
+            0 0 40px cyan,
+            0 0 55px cyan,
+            0 0 70px cyan,
+            0 0 80px cyan;
             
-            background-color:#ffffff;
-                       
         }
-        .navbar li a:hover{
-            color: black;
-            font-weight: normal;
+
+
+        h1 {
+            padding: 6px;
+            margin-left: 100px;
         }
+
+        header {
+            padding: 0px;
+            margin: 0px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.966);
+            border-radius: 10px;
+            width: 98.5%;
+            height: 15%;
+        }
+
+        a {
+            text-decoration: none;
+            color: dodgerblue;
+            text-shadow: 3px 3px 30px rgb(0, 0, 0);
+        }
+
+        .heading img {
+            padding: 0px;
+            width: 120px;
+            height: 120px;
+            left: 1px;
+            position: absolute;
+        }
+
+      
 
 
 /* Form styles */
@@ -259,21 +323,33 @@ table tr {
     </style>
 </head>
 <body>
-<header >
-<div class="header">
-    
-    <ul class="navbar">
-        <li><a href="index.php">HOME</a></li>
-        <li><a href="aboutus.php">ABOUT US</a></li>
-        <li><a href="contact.php">CONTACT US</a></li>
-        <li><a href="login.php">LOGOUT</a></li>             
-     </ul>
-   
- </div>
-             
-   </header>
 
-<form action="admin_panel.php<?php if ( $update_id ) echo "?update_id=". $update_id ?>" method="post">
+<header class="heading">
+        <div id="nav">
+            <a href="http://localhost/site%20for%20project/Fitness-site/Main/index.php">
+                <img class="logo" src="http://localhost/site%20for%20project/Fitness-site/img/gyml3w.png" alt="" >
+            </a>
+             
+        </div>
+             <!-- this for navbar -->
+        <div class="center">
+           <ul class="navbar">
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php">НАЧАЛО</a></li> 
+               
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/aboutus.php">ЗА НАС</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/profile.php">ПРОФИЛ</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php">ЗАПИТВАНИЯ</a></li>
+               <br>
+               <br>  
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Admin/admin_orders.php"> ПОРЪЧКИ И ЗАПИТВАНИЯ</a></li>  
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Admin/admin_panel_add_products.php"> ДОБАВИ ПРОДУКТ</a></li>        
+            </ul>
+          
+        </div>
+</header>
+  
+<div class="formPanel">
+<form action="http://localhost/site%20for%20project/Fitness-site/Admin/admin_panel.php<?php if ( $update_id ) echo "?update_id=". $update_id ?>" method="post">
            <input type="text" class="input" placeholder="Име" name="firstname" id="firstname"  required value="<?php echo $firstname;?>"/>
            
            <input type="text" class="input" placeholder="Фамилия" name="lastname" id="lastname" required value="<?php echo $lastname;?>" >
@@ -331,6 +407,7 @@ $result = $PDOstatement->fetchAll(PDO::FETCH_ASSOC);
 }
  ?>
   </table>
+</div>
 </div>
 </body>
 </html>

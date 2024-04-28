@@ -8,6 +8,6 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to the index page
-header("Location: index.php");
+header("Location: http://localhost/site%20for%20project/Fitness-site/Main/index.php");
 exit();
 ?>

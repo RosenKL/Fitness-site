@@ -37,10 +37,10 @@ if (isset($_POST['submit'])) {
             // Check if the user is an admin
             if ($user['is_admin'] == 1) {
                 $_SESSION['is_admin'] = true;
-                header('Location:admin_index.php');
+                header('Location:http://localhost/site%20for%20project/Fitness-site/Admin/admin_index.php');
                 exit();
             } else {
-                header('Location:logedindex.php');
+                header('Location:http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php');
                 exit();
             }
         } else {
@@ -62,13 +62,13 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
 
-   	<script type="text/javascript" src="login.js"></script>
+   	<script type="text/javascript" src="http://localhost/site%20for%20project/Fitness-site/Processors/login.js"></script>
 	
 <style>
 
 			body {
 			
-				background:url('img/bgimg.jpg');
+				background:url('http://localhost/site%20for%20project/Fitness-site/img/bgimg.jpg');
 				color:rgb(255, 255, 255);
 				margin-top: 50px;
 				margin-left: 100px;
@@ -182,7 +182,7 @@ if (isset($_POST['submit'])) {
 	 	
 		<div class="container">
 			
-			<a href="index.php"><img src="img/gyml3w.png" class="avtar" width="130"hight="130"></a>
+			<a href="http://localhost/site%20for%20project/Fitness-site/Main/index.php"><img src="http://localhost/site%20for%20project/Fitness-site/img/gyml3w.png" class="avtar" width="130"hight="130"></a>
 			
 			<h1>ДОБРЕ ДОШЛИ В HAMMERCROSS</h1>
 			<br>
@@ -201,7 +201,7 @@ if (isset($_POST['submit'])) {
 		<div class="container">
 			
 			<span class="">
-				<a class="a" href="registration.php">Нямаш акаунт?Регистрирай се бързо и лесно!</a>
+				<a class="a" href="http://localhost/site%20for%20project/Fitness-site/Main/registration.php">Нямаш акаунт?Регистрирай се бързо и лесно!</a>
 			</span>
 		</div>
 	</form>

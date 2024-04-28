@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['email']))
-    {
-    header('location:login.php');
-    }
+session_start();
+if(!isset($_SESSION['email'])) {
+    header('location:http://localhost/site%20for%20project/Fitness-site/Main/login.php');
+    exit(); // Terminate script execution after redirection
+}
 
 // Set up the database connection parameters
 $servername = "localhost";
@@ -18,42 +18,52 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+$user_email = $_SESSION['email'];
+$sql = "SELECT ID FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $user_email);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$user_id = $row['ID'];
+
 try {
-  if (isset($_POST['submit'])) {
-      $firstname = $_POST['firstname'];
-      $lastname = $_POST['lastname'];
-      $email = $_POST['email'];
-      $mobile = $_POST['mobile'];
-      $category = $_POST['category'];
-      $comment = $_POST['textarea'];
+    if (isset($_POST['submit'])) {
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $mobile = $_POST['mobile'];
+        $category = $_POST['category'];
+        $comment = $_POST['textarea'];
 
-      // Insert the form data into the "appointment" table
-      $sql = "INSERT INTO appointment (firstname, lastname, email, mobile, category, comment) VALUES (?, ?, ?, ?, ?, ?)";
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param("ssssss", $firstname, $lastname, $email, $mobile, $category, $comment);
-      $stmt->execute();
-
-      
-  }
+        // Insert the form data into the "appointment" table
+        $sql = "INSERT INTO appointment (user_id, firstname, lastname, email, mobile, category, comment) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("issssss", $user_id, $firstname, $lastname, $email, $mobile, $category, $comment);
+        $stmt->execute();
+    }
 } catch (PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
+    echo "Error: " . $e->getMessage();
 }
+
 try {
-  if (isset($_POST['send'])) {
-      $email = $_SESSION['email'];
-      $rating = $_POST['rate'];
+    if (isset($_POST['send'])) {
+        $email = $_SESSION['email'];
+        $rating = $_POST['rate'];
 
-      // Insert the rating into the "rating" table
-      $sql = "INSERT INTO rating (email, rating) VALUES (?, ?)";
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param("ss", $email, $rating);
-      $stmt->execute();
-
-      
-  }
+        // Insert the rating into the "rating" table
+        $sql = "INSERT INTO rating (user_id, email, rating) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iss", $user_id, $email, $rating);
+        $stmt->execute();
+    }
 } catch (PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
+    echo "Error: " . $e->getMessage();
 }
+
+// Close the database connection
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +78,7 @@ try {
         display: block;   
         padding: 100px 150px;
         font-family: 'Calibri', Courier, monospace;
-        background:url('img/contactbg.jpg');
+        background:url('http://localhost/site%20for%20project/Fitness-site/img/contactbg.jpg');
         background-repeat: no-repeat;
         background-size: cover;
        
@@ -254,30 +264,30 @@ try {
                 <h1>НАШИТЕ КОНТАКТИ</h1>
                 
                 <h3>
-                  <img src="img/mail-i.png" alt=""><b>HammerCross@gmail.com</b>
+                  <img src="http://localhost/site%20for%20project/Fitness-site/img/mail-i.png" alt=""><b>HammerCross@gmail.com</b>
                 </h3>
                 
                 <h3>
-                    <img src="img/phone-i.png" alt=""><b>0895757180</b><br>
+                    <img src="http://localhost/site%20for%20project/Fitness-site/img/phone-i.png" alt=""><b>0895757180</b><br>
                                                       <b>0898274365</b>
                 </h3>
                 
                 <h3>
                   
-                   <img src="img/add-i.png"  ><b>кв. Север, гр.Ботевград<br> </b>
+                   <img src="http://localhost/site%20for%20project/Fitness-site/img/add-i.png"  ><b>кв. Север, гр.Ботевград<br> </b>
                   </a>
                 </h3>
 
                 <div class="col">
                   
                   <a href="#" class="twitter btn">
-                     <img class="twitter" src="img/tweet-i.webp">
+                     <img class="twitter" src="http://localhost/site%20for%20project/Fitness-site/img/tweet-i.webp">
                   </a>
                   <a href="#" class="fb btn">
-                     <img class="facebook" src="img/fb-i.webp">
+                     <img class="facebook" src="http://localhost/site%20for%20project/Fitness-site/img/fb-i.webp">
                   </a>
                   <a href="#" class="insta btn">
-                     <img class="instagram" src="img/insta-i.webp">
+                     <img class="instagram" src="http://localhost/site%20for%20project/Fitness-site/img/insta-i.webp">
                   </a>
                 </div>
             </div>
@@ -285,7 +295,7 @@ try {
           </td>
   
           <td>
-            <form action="contact.php" method="POST" >
+            <form action="http://localhost/site%20for%20project/Fitness-site/Main/contact.php" method="POST" >
                 <div class="container">
                                                   
                                     
@@ -334,13 +344,13 @@ try {
 
 
       <div class="rate">
-        <a href="logedindex.php">
-          <img class="raticon" src="img/gyml3w.png" alt="">
+        <a href="http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php">
+          <img class="raticon" src="http://localhost/site%20for%20project/Fitness-site/img/gyml3w.png" alt="">
         </a>
         
            
             <div class="opt" >
-              <form action="contact.php" method="POST" >
+              <form action="http://localhost/site%20for%20project/Fitness-site/Main/contact.php" method="POST" >
                 <h3>Дайте мнение за нашето..<br>представяне!</h3>
                 <input  type="radio" name="rate" value="Най-добрите!" /> Най-добрите!
                 <br>

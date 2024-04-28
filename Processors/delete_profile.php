@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['email'])) {
-  header('location: login.php');
+  header('location: http://localhost/site%20for%20project/Fitness-site/Main/login.php');
   exit;
 }
 
@@ -33,7 +33,7 @@ try {
       $stmt->execute();
 
       // Redirect to the login page or any other desired location
-      header('location: login.php');
+      header('location: http://localhost/site%20for%20project/Fitness-site/Main/login.php');
       exit;
     } else {
      // Incorrect password

@@ -1,15 +1,13 @@
 <?php
 session_start();
- //Check if the user is already logged in
+
+// Check if the user is already logged in
 if (isset($_SESSION['email'])) {
     // Redirect the user to the appropriate page based on their role
-   if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
-        header('Location: admin_index.php');
+    if (isset($_SESSION['is_admin']) xor $_SESSION['is_admin']) {
+        header('Location: http://localhost/site%20for%20project/Fitness-site/Main/logedindex.php');
         exit();
-    } else {
-       header('Location: logedindex.php');
-       exit();
-   }
+    }
 }
 
 ?>
@@ -27,7 +25,7 @@ if (isset($_SESSION['email'])) {
         body{
             padding: 0%;
             margin: 0%;
-            background-image: url("img/gymbgl34.webp");
+            background-image: url("http://localhost/site%20for%20project/Fitness-site/img/gymbgl34.webp");
             background-repeat: no-repeat;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -50,8 +48,8 @@ if (isset($_SESSION['email'])) {
         .center{
             display: flex;
             width: 70%;
-            height:50px;
-            left: 48%;
+            height:45px;
+            left: 35%;
             margin: 10px auto;
             position: absolute;
             
@@ -62,17 +60,15 @@ if (isset($_SESSION['email'])) {
         .navbar li{
             display: inline-block;
             font:20px solid;
-            /* border: white 1px solid;
-            border-radius: 5px; */
+             
            
         }
         .navbar li a{
            
             color:#ffffff;
             text-decoration-line: none;
-            padding:34px 5px;
+            padding: 34px 8px ;
             text-shadow: 2px 2px 20px black;
-            /* transition:1s; */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             
         }
@@ -90,6 +86,9 @@ if (isset($_SESSION['email'])) {
             
         }
 
+
+
+
       
           table{
             position: absolute;
@@ -99,12 +98,10 @@ if (isset($_SESSION['email'])) {
             box-shadow: 2px 2px 20px black;
               
           }
-        
           .footdown{
              
               text-align: center;
               color: white;
-              margin-bottom: 0px;
               padding-bottom:20px;
               padding-top:50px;
              
@@ -143,21 +140,22 @@ if (isset($_SESSION['email'])) {
               width: 100%;
               /* height: 100vh; */
               /* margin-top: 278px; */
-              margin-top:230px ;
+              margin-top:250px ;
               padding-left: 5%;
               padding-top: 15%;
               padding-bottom: 35%;
               /* background-image: url("img/bgtemp2.png"); */
-              background:linear-gradient(rgba(0, 68, 255, 0.616),rgba(255, 255, 255, 0.575) ,rgba(20, 114, 255, 0.616)), url("img/bgtemp2.png");
+              background: url("http://localhost/site%20for%20project/Fitness-site/img/bgtemp2.png");
               background-repeat: no-repeat;
-              background-size: cover;
+              background-size: 100% 80%;
               /* background-color: rgba(79, 155, 255, 0.685); */
-             
+            
               
               
           }
 
           .pagediv{
+                
                 margin-left: 2%;
                 padding: 2%;
                 border-radius: 20px;
@@ -178,7 +176,7 @@ if (isset($_SESSION['email'])) {
 
        
 
-          .main{
+        .main{
             display:flex;
             justify-content:center;
             align-items:center;
@@ -186,10 +184,8 @@ if (isset($_SESSION['email'])) {
             height:85vh;
             color:white;
             text-align:center;
-           
-           
-
         }
+
         section:hover{
             background-color:rgba(0, 0, 0, 0.421);
             border-radius:30px;
@@ -234,37 +230,35 @@ if (isset($_SESSION['email'])) {
         .b1:hover{
             color: white;
         }
+        .footer{
+            position: relative;
+            bottom: 205px;
+        }
+       
     </style>
 </head>
 <body>
-    
-   
-   
-  
     <header class="header">
        
         <div class="left">
           
-           <img src="img\gyml3w.png" >       
+           <img src="http://localhost/site%20for%20project/Fitness-site/img/gyml3w.png" >       
                         
         </div>
-
-       
-
         <!-- this for navbar -->
         <div class="center">
            <ul class="navbar">
-               <li><a href="aboutus.php">ЗА НАС</a></li>
-               <li><a href="profile.php">ПРОФИЛ</a></li>
-               <li><a href="contact.php">ЗАПИТВАНИЯ</a></li>
-               <li><a href="lessons.php">УРОЦИ</a></li>
-               <li><a href="registration.php">РЕГИСТРАЦИЯ</a></li>
-               <li> <a href="login.php">ВЛЕЗ</a></li>             
+             <li><a href="http://localhost/site%20for%20project/Fitness-site/Admin/admin_panel.php">АДМИН ПАНЕЛ</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/aboutus.php">ЗА НАС</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/profile.php">ПРОФИЛ</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php">ЗАПИТВАНИЯ</a></li>
+               <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/catalog.php">КАТАЛОГ</a></li>
+               <li> <a href="http://localhost/site%20for%20project/Fitness-site/Processors/logout.php">НАПУСНИ ПРОФИЛА</a></li>
             </ul>
           
         </div>
               
-    
+    </header>
 
 
     <div class="main">
@@ -275,8 +269,8 @@ if (isset($_SESSION['email'])) {
             <p>Здраво тяло,здрав живот</p>
             <h1>Включи се сега</h1>
             <!-- <p>"stop Wishing start Doing"</p> -->
-            <a href="aboutus.php" class="b1">Научи повече &nbsp;</a>
-            <a href="registration.php" class="b1">Регистрирай се</a>
+            <a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php" class="b1">Направи заявка &nbsp;</a>
+            <a href="http://localhost/site%20for%20project/Fitness-site/Main/catalog.php" class="b1">Каталог &nbsp;</a>
         </section>
     </div>
 
@@ -304,32 +298,34 @@ if (isset($_SESSION['email'])) {
            
         <tr class="footoption" >
            
-          <td >                                         
-            <li> <a href="aboutus.php">ЗА НАС</a></li>
-                <br>
-            <li> <a href="contact.php">ЗАПИТВАНИЯ</a></li>                       
-          </td>
-          <td>               
-            <li><a href="lessons.php">УРОЦИ</a></li>
-                 <br>
-            <li> <a href="profile.php">ПРОФИЛ</a></li> 
-                                     
-           </td>
-           <td>                      
-        <li><a href="contact.php">КОНТАКТИ</a></li>
-            <br>                         
-           </td>
-               
+               <td >                
+                                      
+                   <li> <a href="http://localhost/site%20for%20project/Fitness-site/Main/aboutus.php">ЗА НАС</a></li>
+                   <br>
+                   <li> <a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php">ЗАПИТВАНИЯ</a></li>
+                  
+                </td>
+               <td>               
+                    <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/catalog.php">КАТАЛОГ</a></li>
+                    <br>
+                    <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/contact.php">КОНТАКТИ</a></li>
+                  
+                </td>
+                <td>                      
+                   <li><a href="http://localhost/site%20for%20project/Fitness-site/Main/profile.php">ПРОФИЛ</a></li>
+                   <br>
+                   <li><a href="http://localhost/site%20for%20project/Fitness-site/Admin/admin_panel.php">АДМИН ПАНЕЛ</a></li>
+               </td>
+           
         </tr>
         
         <tr >
             <td class="footdown" colspan="3" >© 2023 HammerCross Всички права са запазени!</td>
         </tr>
     
-    </table>
+      </table>
     </footer>
     
 </body>
     </html>
-
    
